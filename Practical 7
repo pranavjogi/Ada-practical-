@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class Pra7 {
+    public static void main(String[] args) {
+        int n = 5;
+        int[][] cost = {
+            {0, 2, 0, 6, 0},
+            {2, 0, 3, 8, 5},
+            {0, 3, 0, 0, 7},
+            {6, 8, 0, 0, 9},
+            {0, 5, 7, 9, 0}
+        };
+
+        int[] visited = new int[n];
+        visited[0] = 1;
+
+        int edges = 0;
+        int total = 0;
+
+        while (edges < n - 1) {
+            int min = 999, x = 0, y = 0;
+
+            for (int i = 0; i < n; i++) {
+                if (visited[i] == 1) {
+                    for (int j = 0; j < n; j++) {
+                        if (visited[j] == 0 && cost[i][j] != 0) {
+                            if (cost[i][j] < min) {
+                                min = cost[i][j];
+                                x = i;
+                                y = j;
+                            }
+                        }
+                    }
+                }
+            }
+
+            System.out.println(x + " - " + y + " : " + min);
+            visited[y] = 1;
+            total = total + min;
+            edges++;
+        }
+
+        System.out.println("Total Cost: " + total);
+    }
+}
